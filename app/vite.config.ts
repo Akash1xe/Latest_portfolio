@@ -39,10 +39,9 @@ export default defineConfig({
     compression({ algorithm: "gzip", ext: ".gz" }),
     compression({ algorithm: "brotliCompress", ext: ".br" }),
     VitePWA({
-      registerType: "autoUpdate",
-      workbox: {
-        globPatterns: ["**/*.{js,css,html,woff2}"],
-      },
+      // Remove the existing offline worker and its precache. The portfolio's
+      // admin console must always receive the current production app shell.
+      selfDestroying: true,
     }),
   ],
   resolve: {

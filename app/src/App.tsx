@@ -13,27 +13,27 @@ function App() {
   return (
     <ThemeProvider>
       <PortfolioContentProvider>
-      <Routes>
-        {/* Valid portfolio routes */}
-        <Route path="/" element={<MainPortfolio />} />
-        <Route path="/home" element={<MainPortfolio />} />
-        <Route path="/about" element={<MainPortfolio />} />
-        <Route path="/skills" element={<MainPortfolio />} />
-        <Route path="/projects" element={<MainPortfolio />} />
-        <Route path="/competitive-programming" element={<MainPortfolio />} />
-        <Route path="/experience" element={<MainPortfolio />} />
-        <Route path="/contact" element={<MainPortfolio />} />
-        <Route path="/learning" element={<MainPortfolio />} />
-        <Route path="/articles" element={<MainPortfolio />} />
-        <Route path="/resume" element={<MainPortfolio />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Routes>
+          {/* Valid portfolio routes */}
+          <Route path="/" element={<MainPortfolio />} />
+          <Route path="/home" element={<MainPortfolio />} />
+          <Route path="/about" element={<MainPortfolio />} />
+          <Route path="/skills" element={<MainPortfolio />} />
+          <Route path="/projects" element={<MainPortfolio />} />
+          <Route path="/competitive-programming" element={<MainPortfolio />} />
+          <Route path="/experience" element={<MainPortfolio />} />
+          <Route path="/contact" element={<MainPortfolio />} />
+          <Route path="/learning" element={<MainPortfolio />} />
+          <Route path="/articles" element={<MainPortfolio />} />
+          <Route path="/resume" element={<MainPortfolio />} />
+          <Route path="/admin/*" element={<AdminDashboard />} />
 
-        {/* Individual project deep-link — editor loads with that project tab active */}
-        <Route path="/projects/:slug" element={<MainPortfolio />} />
+          {/* Individual project deep-link — editor loads with that project tab active */}
+          <Route path="/projects/:slug" element={<MainPortfolio />} />
 
-        {/* Catch-all route for 404 */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          {/* Catch-all route for 404 */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </PortfolioContentProvider>
     </ThemeProvider>
   );

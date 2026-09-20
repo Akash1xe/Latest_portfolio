@@ -1,27 +1,10 @@
 import { AlertCircle, Home } from "lucide-react";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./not-found.module.css";
 
 const NotFound = () => {
   const navigate = useNavigate();
-  const [countdown, setCountdown] = useState(3);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          navigate("/", { replace: true });
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-ctp-base flex items-center justify-center px-4">
@@ -44,9 +27,7 @@ const NotFound = () => {
         </p>
 
         <p className="text-sm text-ctp-subtext1 mb-8">
-          Taking you to the home page in{" "}
-          <span className="text-ctp-peach font-bold text-xl">{countdown}</span>{" "}
-          seconds...
+          Check the address or return to the portfolio home page.
         </p>
 
         <button
