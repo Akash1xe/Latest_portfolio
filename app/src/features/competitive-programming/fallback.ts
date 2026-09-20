@@ -1,4 +1,4 @@
-import type { CompetitiveProgrammingData } from "./types";
+import type { CompetitiveProgrammingData } from "./types.js";
 
 const today = new Date();
 const calendar = Array.from({ length: 91 }, (_, index) => {

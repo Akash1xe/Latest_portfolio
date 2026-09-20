@@ -4,8 +4,8 @@ import {
   isAuthConfigured,
   setSession,
   verifyState,
-} from "../_auth";
-import type { VercelRequest, VercelResponse } from "../_types";
+} from "../_auth.js";
+import type { VercelRequest, VercelResponse } from "../_types.js";
 
 const attempts = new Map<string, { count: number; resetAt: number }>();
 
@@ -16,7 +16,11 @@ const originFor = (request: VercelRequest) => {
 };
 
 const rateLimited = (request: VercelRequest) => {
-  const ip = String(request.headers["x-forwarded-for"] ?? request.socket.remoteAddress ?? "unknown").split(",")[0];
+  const ip = String(
+    request.headers["x-forwarded-for"] ??
+      request.socket.remoteAddress ??
+      "unknown"
+  ).split(",")[0];
   const now = Date.now();
   const current = attempts.get(ip);
   if (!current || current.resetAt < now) {
@@ -27,16 +31,22 @@ const rateLimited = (request: VercelRequest) => {
   return current.count > 8;
 };
 
-export default async function handler(request: VercelRequest, response: VercelResponse) {
+export default async function handler(
+  request: VercelRequest,
+  response: VercelResponse
+) {
   if (!isAuthConfigured()) {
-    return response.status(503).json({ error: "Admin authentication is not configured." });
+    return response
+      .status(503)
+      .json({ error: "Admin authentication is not configured." });
   }
   const action = String(request.query.action ?? "login");
   if (action === "logout") {
     clearSession(response);
     return response.redirect(302, "/admin");
   }
-  if (rateLimited(request)) return response.status(429).json({ error: "Too many login attempts" });
+  if (rateLimited(request))
+    return response.status(429).json({ error: "Too many login attempts" });
 
   const redirectUri = `${originFor(request)}/api/auth/github?action=callback`;
   if (action === "login") {
@@ -47,31 +57,55 @@ export default async function handler(request: VercelRequest, response: VercelRe
       scope: "read:user",
       state,
     });
-    return response.redirect(302, `https://github.com/login/oauth/authorize?${parameters}`);
+    return response.redirect(
+      302,
+      `https://github.com/login/oauth/authorize?${parameters}`
+    );
   }
-  if (action !== "callback") return response.status(400).json({ error: "Unknown auth action" });
+  if (action !== "callback")
+    return response.status(400).json({ error: "Unknown auth action" });
 
   const code = String(request.query.code ?? "");
   const state = String(request.query.state ?? "");
-  if (!code || !verifyState(request, state)) return response.status(403).json({ error: "Invalid OAuth state" });
+  if (!code || !verifyState(request, state))
+    return response.status(403).json({ error: "Invalid OAuth state" });
 
-  const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
-    method: "POST",
-    headers: { accept: "application/json", "content-type": "application/json" },
-    body: JSON.stringify({
-      client_id: process.env.GITHUB_CLIENT_ID,
-      client_secret: process.env.GITHUB_CLIENT_SECRET,
-      code,
-      redirect_uri: redirectUri,
-    }),
-  });
-  const token = (await tokenResponse.json()) as { access_token?: string; error?: string };
-  if (!token.access_token) return response.status(401).json({ error: token.error ?? "GitHub authentication failed" });
+  const tokenResponse = await fetch(
+    "https://github.com/login/oauth/access_token",
+    {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
+        code,
+        redirect_uri: redirectUri,
+      }),
+    }
+  );
+  const token = (await tokenResponse.json()) as {
+    access_token?: string;
+    error?: string;
+  };
+  if (!token.access_token)
+    return response
+      .status(401)
+      .json({ error: token.error ?? "GitHub authentication failed" });
 
   const userResponse = await fetch("https://api.github.com/user", {
-    headers: { authorization: `Bearer ${token.access_token}`, accept: "application/vnd.github+json" },
+    headers: {
+      authorization: `Bearer ${token.access_token}`,
+      accept: "application/vnd.github+json",
+    },
   });
-  const user = (await userResponse.json()) as { id?: number; login?: string; avatar_url?: string };
+  const user = (await userResponse.json()) as {
+    id?: number;
+    login?: string;
+    avatar_url?: string;
+  };
   if (!user.id || String(user.id) !== process.env.GITHUB_ADMIN_ID) {
     return response.status(404).json({ error: "Not found" });
   }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { TechName } from "./components/base/technologies";
+import type { TechName } from "./components/base/technologies.js";
 
 export type TechnologyLearning = {
   name: string;
@@ -42,10 +42,7 @@ export type ProjectDemoVideo = {
 };
 
 export type ProjectAssetCategory =
-  | "research"
-  | "architecture"
-  | "demo"
-  | "documentation";
+  "research" | "architecture" | "demo" | "documentation";
 
 export type ProjectAsset = {
   id: string;

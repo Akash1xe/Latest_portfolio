@@ -1,4 +1,4 @@
-import type { Project, WorkExperience } from "../../types";
+import type { Project, WorkExperience } from "../../types.js";
 
 export type PortfolioContent = {
   profile: {

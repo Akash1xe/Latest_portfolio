@@ -1,7 +1,7 @@
-import { defaultPortfolioContent } from "../../src/features/portfolio-content/defaults";
-import type { PortfolioContent } from "../../src/features/portfolio-content/types";
-import { getDb, parseStoredJson } from "../_db";
-import type { VercelRequest, VercelResponse } from "../_types";
+import { defaultPortfolioContent } from "../../src/features/portfolio-content/defaults.js";
+import type { PortfolioContent } from "../../src/features/portfolio-content/types.js";
+import { getDb, parseStoredJson } from "../_db.js";
+import type { VercelRequest, VercelResponse } from "../_types.js";
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   if (request.method !== "GET") return response.status(405).json({ error: "Method not allowed" });

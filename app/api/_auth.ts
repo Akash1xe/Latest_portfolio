@@ -1,6 +1,6 @@
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 
-import type { VercelRequest, VercelResponse } from "./_types";
+import type { VercelRequest, VercelResponse } from "./_types.js";
 
 const SESSION_COOKIE = "akash_admin_session";
 const STATE_COOKIE = "akash_oauth_state";
@@ -14,14 +14,15 @@ type AdminSession = {
 };
 
 const secret = () => process.env.SESSION_SECRET ?? "";
-const sign = (value: string) => createHmac("sha256", secret()).update(value).digest("base64url");
+const sign = (value: string) =>
+  createHmac("sha256", secret()).update(value).digest("base64url");
 
 export const isAuthConfigured = () =>
   Boolean(
     process.env.GITHUB_CLIENT_ID &&
-      process.env.GITHUB_CLIENT_SECRET &&
-      process.env.GITHUB_ADMIN_ID &&
-      secret().length >= 32
+    process.env.GITHUB_CLIENT_SECRET &&
+    process.env.GITHUB_ADMIN_ID &&
+    secret().length >= 32
   );
 
 export const parseCookies = (request: VercelRequest) =>
@@ -49,9 +50,12 @@ export const readSession = (request: VercelRequest): AdminSession | null => {
   const token = parseCookies(request)[SESSION_COOKIE];
   if (!token) return null;
   const [payload, signature] = token.split(".");
-  if (!payload || !signature || !safeEqual(sign(payload), signature)) return null;
+  if (!payload || !signature || !safeEqual(sign(payload), signature))
+    return null;
   try {
-    const session = JSON.parse(Buffer.from(payload, "base64url").toString("utf8")) as AdminSession;
+    const session = JSON.parse(
+      Buffer.from(payload, "base64url").toString("utf8")
+    ) as AdminSession;
     if (session.expiresAt < Date.now()) return null;
     if (String(session.githubId) !== process.env.GITHUB_ADMIN_ID) return null;
     return session;
@@ -62,7 +66,9 @@ export const readSession = (request: VercelRequest): AdminSession | null => {
 
 const cookie = (name: string, value: string, maxAge: number) =>
   `${name}=${encodeURIComponent(value)}; Path=/; HttpOnly; SameSite=Lax${
-    process.env.VERCEL_ENV || process.env.NODE_ENV === "production" ? "; Secure" : ""
+    process.env.VERCEL_ENV || process.env.NODE_ENV === "production"
+      ? "; Secure"
+      : ""
   }; Max-Age=${maxAge}`;
 
 export const createState = (response: VercelResponse) => {
@@ -76,7 +82,11 @@ export const verifyState = (request: VercelRequest, received: string) => {
   const value = parseCookies(request)[STATE_COOKIE];
   if (!value) return false;
   const [nonce, signature] = value.split(".");
-  return nonce === received && Boolean(signature) && safeEqual(sign(nonce), signature);
+  return (
+    nonce === received &&
+    Boolean(signature) &&
+    safeEqual(sign(nonce), signature)
+  );
 };
 
 export const setSession = (
@@ -101,7 +111,10 @@ export const setSession = (
 export const clearSession = (response: VercelResponse) =>
   response.setHeader("set-cookie", cookie(SESSION_COOKIE, "", 0));
 
-export const requireAdmin = (request: VercelRequest, response: VercelResponse) => {
+export const requireAdmin = (
+  request: VercelRequest,
+  response: VercelResponse
+) => {
   const session = readSession(request);
   if (!session) {
     response.status(404).json({ error: "Not found" });

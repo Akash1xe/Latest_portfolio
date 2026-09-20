@@ -1,11 +1,12 @@
-import type { PortfolioContent } from "./types";
+import type { PortfolioContent } from "./types.js";
 
 export const defaultPortfolioContent: PortfolioContent = {
   profile: {
     name: "Akash Kumar",
     handle: "Akash1xe",
     role: "Backend Developer & Software Engineer",
-    tagline: "I build scalable backend systems, distributed services, and real-time products.",
+    tagline:
+      "I build scalable backend systems, distributed services, and real-time products.",
     location: "Noida, Uttar Pradesh, India",
     githubUrl: "https://github.com/Akash1xe",
     linkedinUrl: "",
@@ -19,10 +20,26 @@ export const defaultPortfolioContent: PortfolioContent = {
   },
   about: {
     background: [
-      { question: "Who am I?", answer: "Backend developer and software engineer focused on scalable systems." },
-      { question: "How did I start?", answer: "Started with web applications and moved deeper into APIs, distributed systems, and real-time products." },
-      { question: "What do I enjoy?", answer: "Designing reliable backends, event-driven services, and useful developer experiences." },
-      { question: "What drives me?", answer: "Creating useful applications that help people accomplish their goals." },
+      {
+        question: "Who am I?",
+        answer:
+          "Backend developer and software engineer focused on scalable systems.",
+      },
+      {
+        question: "How did I start?",
+        answer:
+          "Started with web applications and moved deeper into APIs, distributed systems, and real-time products.",
+      },
+      {
+        question: "What do I enjoy?",
+        answer:
+          "Designing reliable backends, event-driven services, and useful developer experiences.",
+      },
+      {
+        question: "What drives me?",
+        answer:
+          "Creating useful applications that help people accomplish their goals.",
+      },
     ],
     focusAreas: [
       "Distributed systems and microservice architecture",
@@ -37,7 +54,12 @@ export const defaultPortfolioContent: PortfolioContent = {
       "Exploring AI/ML applications in web development",
       "Reading technical blogs and papers",
     ],
-    personalInterests: ["Watching Virat Kohli's batting", "Exploring new music", "Going to the gym", "Playing PES"],
+    personalInterests: [
+      "Watching Virat Kohli's batting",
+      "Exploring new music",
+      "Going to the gym",
+      "Playing PES",
+    ],
     philosophy: [
       "Make it Work|Functionality first, ensuring the core requirements are met",
       "Make it Right|Clean, maintainable code that follows best practices",
@@ -45,10 +67,38 @@ export const defaultPortfolioContent: PortfolioContent = {
     ],
   },
   skills: [
-    { category: "Frontend", skills: ["React", "TypeScript", "Tailwind CSS", "Redux", "React Query"] },
-    { category: "Backend", skills: ["Node.js", "Express", "Python", "MongoDB", "PostgreSQL", "Redis", "MySQL", "GraphQL", "REST API Design"] },
-    { category: "DevOps & Cloud", skills: ["Docker", "Kafka", "Redis", "Elasticsearch", "Vercel"] },
-    { category: "Tools & Others", skills: ["Git", "GitHub", "Agile Methodologies", "Unit Testing", "E2E Testing"] },
+    {
+      category: "Frontend",
+      skills: ["React", "TypeScript", "Tailwind CSS", "Redux", "React Query"],
+    },
+    {
+      category: "Backend",
+      skills: [
+        "Node.js",
+        "Express",
+        "Python",
+        "MongoDB",
+        "PostgreSQL",
+        "Redis",
+        "MySQL",
+        "GraphQL",
+        "REST API Design",
+      ],
+    },
+    {
+      category: "DevOps & Cloud",
+      skills: ["Docker", "Kafka", "Redis", "Elasticsearch", "Vercel"],
+    },
+    {
+      category: "Tools & Others",
+      skills: [
+        "Git",
+        "GitHub",
+        "Agile Methodologies",
+        "Unit Testing",
+        "E2E Testing",
+      ],
+    },
   ],
   experiences: [],
   projects: [],
@@ -57,7 +107,14 @@ export const defaultPortfolioContent: PortfolioContent = {
     codeforcesUsername: "akash1xe",
     primaryLanguage: "C++",
     currentFocus: ["Backtracking", "Binary Search"],
-    enabledStats: ["streaks", "calendar", "contests", "topics", "recent", "rating graph"],
+    enabledStats: [
+      "streaks",
+      "calendar",
+      "contests",
+      "topics",
+      "recent",
+      "rating graph",
+    ],
     fallbackTotal: 500,
   },
   publishState: "published",
