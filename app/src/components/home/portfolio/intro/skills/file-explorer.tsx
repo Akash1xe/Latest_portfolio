@@ -1,0 +1,162 @@
+import { ChevronDown, ChevronRight, Folder, FolderOpen } from "lucide-react";
+import { FaFileAlt } from "react-icons/fa";
+import {
+  SiApachekafka,
+  SiCplusplus,
+  SiCss3,
+  SiDocker,
+  SiGit,
+  SiJavascript,
+  SiJson,
+  SiKubernetes,
+  SiPython,
+  SiReact,
+  SiTerraform,
+} from "react-icons/si";
+
+import { useGitComponent } from "@/hooks/use-git-component";
+
+import { FileItem } from "./project-structure";
+
+const getFileIcon = (extension?: string) => {
+  const iconProps = { size: 16, className: "text-current" };
+
+  switch (extension) {
+    case "tsx":
+      return <SiReact {...iconProps} className="text-ctp-sky" />;
+    case "js":
+      return <SiJavascript {...iconProps} className="text-ctp-yellow" />;
+    case "py":
+      return <SiPython {...iconProps} className="text-ctp-sapphire" />;
+    case "cpp":
+      return <SiCplusplus {...iconProps} className="text-ctp-blue" />;
+    case "kafka":
+      return <SiApachekafka {...iconProps} className="text-ctp-peach" />;
+    case "css":
+      return <SiCss3 {...iconProps} className="text-ctp-blue" />;
+    case "docker":
+      return <SiDocker {...iconProps} className="text-ctp-blue" />;
+    case "yaml":
+      return <SiKubernetes {...iconProps} className="text-ctp-lavender" />;
+    case "git":
+      return <SiGit {...iconProps} className="text-ctp-red" />;
+    case "tf":
+      return <SiTerraform {...iconProps} className="text-ctp-mauve" />;
+    case "json":
+      return <SiJson {...iconProps} className="text-ctp-yellow" />;
+    case "txt":
+      return <FaFileAlt {...iconProps} className="text-ctp-overlay0" />;
+    default:
+      return <FaFileAlt {...iconProps} className="text-ctp-overlay0" />;
+  }
+};
+
+interface FileExplorerItemProps {
+  item: FileItem;
+  isVisible: boolean;
+  onToggle?: () => void;
+  isExpanded?: boolean;
+}
+
+export const FileExplorerItem: React.FC<FileExplorerItemProps> = ({
+  item,
+  isVisible,
+  onToggle,
+  isExpanded = false,
+}) => {
+  const ref = useGitComponent(FileExplorerItem);
+  const paddingLeft = item.depth * 20 + 8;
+
+  return (
+    <>
+      {/* Main file/folder line */}
+      <div
+        ref={ref}
+        className={`flex items-center rounded-2xl py-1 px-2 hover:bg-ctp-surface0 cursor-pointer transition-all duration-300 ${
+          isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
+        }`}
+        style={{
+          paddingLeft: `${paddingLeft}px`,
+          transitionDelay: `${item.delay}ms`,
+        }}
+        onClick={onToggle}
+      >
+        {item.type === "folder" && (
+          <span className="mr-2 text-ctp-text flex-shrink-0">
+            {isExpanded ? (
+              <ChevronDown size={14} />
+            ) : (
+              <ChevronRight size={14} />
+            )}
+          </span>
+        )}
+
+        <span className="mr-3 flex-shrink-0">
+          {item.type === "folder" ? (
+            isExpanded ? (
+              <FolderOpen size={16} className="text-ctp-blue" />
+            ) : (
+              <Folder size={16} className="text-ctp-blue" />
+            )
+          ) : (
+            getFileIcon(item.extension)
+          )}
+        </span>
+
+        <span className={`text-sm font-source flex-shrink-0 ${item.color}`}>
+          {item.name}
+        </span>
+      </div>
+    </>
+  );
+};
+
+interface FileExplorerProps {
+  items: FileItem[];
+  visibleItems: Set<string>;
+  expandedFolders: Set<string>;
+  onToggleFolder: (path: string) => void;
+  parentPath?: string;
+}
+
+const FileExplorer: React.FC<FileExplorerProps> = ({
+  items,
+  visibleItems,
+  expandedFolders,
+  onToggleFolder,
+  parentPath = "",
+}) => {
+  return (
+    <>
+      {items.map((item) => {
+        const itemPath = parentPath ? `${parentPath}/${item.name}` : item.name;
+        const isExpanded = expandedFolders.has(itemPath);
+        const isVisible = visibleItems.has(itemPath);
+
+        return (
+          <div key={itemPath}>
+            <FileExplorerItem
+              item={item}
+              isVisible={isVisible}
+              isExpanded={isExpanded}
+              onToggle={() =>
+                item.type === "folder" && onToggleFolder(itemPath)
+              }
+            />
+            {item.children && isExpanded && (
+              <FileExplorer
+                items={item.children}
+                visibleItems={visibleItems}
+                expandedFolders={expandedFolders}
+                onToggleFolder={onToggleFolder}
+                parentPath={itemPath}
+              />
+            )}
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+export default FileExplorer;

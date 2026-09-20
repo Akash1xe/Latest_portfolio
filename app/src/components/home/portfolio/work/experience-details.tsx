@@ -1,0 +1,228 @@
+import React, { useState } from "react";
+import { FaCode, FaHandPointer } from "react-icons/fa";
+
+import Reveal from "@/components/animations/reveal/Reveal";
+import TechBadge from "@/components/base/tech-badge";
+import { OutlineNode } from "@/components/home/editor/outline";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import IconBox from "@/components/ui/icon-box";
+import { Heading, Text } from "@/components/ui/text";
+import { usePortfolioContent } from "@/features/portfolio-content/portfolio-content-context";
+import { useGitComponent } from "@/hooks/use-git-component";
+import useMobile from "@/hooks/use-mobile";
+
+import ExperienceHeader from "./experience-header";
+import styles from "./work.module.css";
+import Achievements from "./work-acheivements";
+
+interface ExperienceDetailsProps {
+  selectedExp: number;
+}
+
+const TechnologiesContent: React.FC<{ selectedExp: number }> = ({
+  selectedExp,
+}) => {
+  const gitRef = useGitComponent(TechnologiesContent);
+  const { content } = usePortfolioContent();
+  const experiences = content.experiences;
+  return (
+    <div
+      ref={gitRef}
+      className="px-4 sm:px-5 md:px-6 lg:px-8 pb-6 sm:pb-8 border-t border-ctp-surface1/20"
+    >
+      <OutlineNode label="Technologies Used">
+        <div className="pt-4 sm:pt-6">
+          <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5">
+            <IconBox
+              color="peach"
+              size="sm"
+              className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 bg-ctp-peach/20 flex items-center justify-center"
+            >
+              <FaCode className="w-4 h-4 sm:w-5 sm:h-5" />
+            </IconBox>
+            <Heading as="h3">Tech Stack & Tools</Heading>
+            <div className="flex-1 h-px bg-gradient-to-r from-ctp-surface1/50 to-transparent" />
+          </div>
+
+          <Reveal
+            effect="cascade"
+            duration={0.5}
+            staggerChildren={0.05}
+            className="flex flex-wrap gap-2 sm:gap-3 md:gap-4"
+          >
+            {experiences[selectedExp].technologies.map((tech, index) => (
+              <div key={`${tech}-${index}`} className={styles.interactiveLg}>
+                <TechBadge tech={tech} />
+              </div>
+            ))}
+          </Reveal>
+        </div>
+      </OutlineNode>
+    </div>
+  );
+};
+
+const FooterContent: React.FC = () => {
+  const gitRef = useGitComponent(FooterContent);
+  return (
+    <div
+      ref={gitRef}
+      className="px-4 sm:px-5 md:px-6 lg:px-8 py-5 sm:py-6 bg-ctp-surface0/30 border-t border-ctp-surface1/20"
+    >
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 text-sm sm:text-base md:text-lg text-ctp-subtext0">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-ctp-green animate-pulse flex-shrink-0" />
+          <span>Experience verified and documented</span>
+        </div>
+        <span className="text-sm sm:text-base md:text-lg">
+          Last updated: July 2024
+        </span>
+      </div>
+    </div>
+  );
+};
+
+const MobileDrawerContent: React.FC<{ selectedExp: number }> = ({ selectedExp }) => {
+  const { content } = usePortfolioContent();
+  const experiences = content.experiences;
+  return (
+  <DrawerContent className="max-h-[90vh] bg-ctp-mantle border-ctp-surface1/50 z-[999999] w-full font-source">
+    <DrawerHeader className="border-b border-ctp-surface1/50 p-4 pb-6">
+      <div className="flex items-center gap-4">
+        <div className="w-12 h-12 rounded-xl bg-ctp-surface0/80 backdrop-blur-sm border border-ctp-surface1/50 overflow-hidden flex-shrink-0">
+          <img
+            src={experiences[selectedExp].imageSrc}
+            alt={experiences[selectedExp].company}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <DrawerTitle className="text-xl font-bold text-ctp-text text-left leading-tight">
+            {experiences[selectedExp].position}
+          </DrawerTitle>
+          <Text variant="caption" className="mt-1 text-left">
+            at {experiences[selectedExp].company}
+          </Text>
+        </div>
+      </div>
+    </DrawerHeader>
+
+    <div className="overflow-y-auto flex-1 pb-6">
+      {/* Achievements */}
+      <div className="pt-6 px-4">
+        <Reveal
+          effect="cascade"
+          duration={0.8}
+          delay={0.1}
+          staggerChildren={0.1}
+        >
+          <Achievements selectedExp={selectedExp} />
+        </Reveal>
+      </div>
+
+      {/* Technologies */}
+      <div className="pt-4">
+        <Reveal effect="fade-up" duration={0.7} delay={0.2}>
+          <TechnologiesContent selectedExp={selectedExp} />
+        </Reveal>
+      </div>
+
+      {/* Footer */}
+      <div className="pt-4">
+        <Reveal effect="fade-up" duration={0.7} delay={0.3}>
+          <FooterContent />
+        </Reveal>
+      </div>
+    </div>
+  </DrawerContent>
+  );
+};
+
+const DesktopContent: React.FC<{ selectedExp: number }> = ({ selectedExp }) => {
+  const gitRef = useGitComponent(DesktopContent);
+  return (
+    <Card
+      ref={gitRef}
+      className="overflow-hidden border-none bg-ctp-surface0/10 backdrop-blur-sm"
+    >
+      <CardContent className="p-0">
+        {/* Header */}
+        <Reveal effect="fade-up" duration={0.7} delay={0.3}>
+          <ExperienceHeader selectedExp={selectedExp} />
+        </Reveal>
+
+        {/* Achievements */}
+        <div className="px-4 sm:px-5 md:px-6 lg:px-8 pb-6 sm:pb-8">
+          <Reveal
+            effect="cascade"
+            duration={0.8}
+            delay={0.4}
+            staggerChildren={0.1}
+          >
+            <Achievements selectedExp={selectedExp} />
+          </Reveal>
+        </div>
+
+        {/* Technologies */}
+        <Reveal effect="fade-up" duration={0.7} delay={0.5}>
+          <TechnologiesContent selectedExp={selectedExp} />
+        </Reveal>
+
+        {/* Footer */}
+        <Reveal effect="fade-up" duration={0.7} delay={0.6}>
+          <FooterContent />
+        </Reveal>
+      </CardContent>
+    </Card>
+  );
+};
+
+const ExperienceDetails: React.FC<ExperienceDetailsProps> = ({
+  selectedExp,
+}) => {
+  const ref = useGitComponent(ExperienceDetails);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { isMobile } = useMobile();
+
+  return (
+    <div ref={ref} className="space-y-6 sm:space-y-8">
+      <div key={`experience-${selectedExp}`} className={styles.slideInUp}>
+        {isMobile ? (
+          <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+            <DrawerTrigger asChild>
+              <div className="cursor-pointer group">
+                <Card className="overflow-hidden border-none bg-ctp-surface0/10 backdrop-blur-sm hover:bg-ctp-surface0/15 transition-all duration-300 relative">
+                  <CardContent className="p-0 pb-12">
+                    <Reveal effect="fade-up" duration={0.7} delay={0.3}>
+                      <ExperienceHeader selectedExp={selectedExp} />
+                    </Reveal>
+                  </CardContent>
+
+                  <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex items-center gap-2 px-4 py-2 bg-transparent backdrop-blur-sm rounded-full border-none text-ctp-overlay0 shadow-lg text-xs">
+                    <FaHandPointer className="w-3 h-3 animate-pulse" />
+                    <span className="font-medium whitespace-nowrap">
+                      Tap for details
+                    </span>
+                  </div>
+                </Card>
+              </div>
+            </DrawerTrigger>
+
+            <MobileDrawerContent selectedExp={selectedExp} />
+          </Drawer>
+        ) : (
+          <DesktopContent selectedExp={selectedExp} />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ExperienceDetails;

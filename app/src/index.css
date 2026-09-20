@@ -1,0 +1,414 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .interactive-scale {
+    @apply transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98];
+  }
+}
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --editor-bg: #1e1e2e;
+    --editor-fg: #cdd6f4;
+    --editor-accent: #89b4fa;
+    --editor-keyword: #f38ba8;
+    --editor-function: #f9e2af;
+    --editor-string: #a6e3a1;
+    --editor-comment: #6c7086;
+    --editor-class: #cba6f7;
+    --editor-special: #f5c2e7;
+    --editor-border: #313244;
+    --editor-active-line: #181825;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+  :root,
+  .latte {
+    --radius: 0.5rem;
+  }
+
+  .dark,
+  .mocha,
+  .macchiato,
+  .frappe {
+    color-scheme: dark;
+  }
+
+  /* Catppuccin Mocha — RGB channels for Tailwind opacity modifier support */
+  :root,
+  .mocha {
+    --ctp-rosewater: 245 224 220;
+    --ctp-flamingo: 242 205 205;
+    --ctp-pink: 245 194 231;
+    --ctp-mauve: 203 166 247;
+    --ctp-red: 243 139 168;
+    --ctp-maroon: 235 160 172;
+    --ctp-peach: 250 179 135;
+    --ctp-yellow: 249 226 175;
+    --ctp-green: 166 227 161;
+    --ctp-teal: 148 226 213;
+    --ctp-sky: 137 220 235;
+    --ctp-sapphire: 116 199 236;
+    --ctp-blue: 137 180 250;
+    --ctp-lavender: 180 190 254;
+    --ctp-text: 205 214 244;
+    --ctp-subtext1: 186 194 222;
+    --ctp-subtext0: 166 173 200;
+    --ctp-overlay2: 147 153 178;
+    --ctp-overlay1: 127 132 156;
+    --ctp-overlay0: 108 112 134;
+    --ctp-surface2: 88 91 112;
+    --ctp-surface1: 69 71 90;
+    --ctp-surface0: 49 50 68;
+    --ctp-base: 30 30 46;
+    --ctp-mantle: 24 24 37;
+    --ctp-crust: 17 17 27;
+  }
+
+  /* Catppuccin Macchiato */
+  .macchiato {
+    --ctp-rosewater: 244 219 214;
+    --ctp-flamingo: 240 198 198;
+    --ctp-pink: 245 189 230;
+    --ctp-mauve: 198 160 246;
+    --ctp-red: 237 135 150;
+    --ctp-maroon: 238 153 160;
+    --ctp-peach: 245 169 127;
+    --ctp-yellow: 238 212 159;
+    --ctp-green: 166 218 149;
+    --ctp-teal: 139 213 202;
+    --ctp-sky: 145 215 227;
+    --ctp-sapphire: 125 196 228;
+    --ctp-blue: 138 173 244;
+    --ctp-lavender: 183 189 248;
+    --ctp-text: 202 211 245;
+    --ctp-subtext1: 184 192 224;
+    --ctp-subtext0: 165 173 203;
+    --ctp-overlay2: 147 154 183;
+    --ctp-overlay1: 128 135 162;
+    --ctp-overlay0: 110 115 141;
+    --ctp-surface2: 91 96 120;
+    --ctp-surface1: 73 77 100;
+    --ctp-surface0: 54 58 79;
+    --ctp-base: 36 39 58;
+    --ctp-mantle: 30 32 48;
+    --ctp-crust: 24 25 38;
+  }
+
+  /* Catppuccin Frappe */
+  .frappe {
+    --ctp-rosewater: 242 213 207;
+    --ctp-flamingo: 238 190 190;
+    --ctp-pink: 244 184 228;
+    --ctp-mauve: 202 158 230;
+    --ctp-red: 231 130 132;
+    --ctp-maroon: 234 153 156;
+    --ctp-peach: 239 159 118;
+    --ctp-yellow: 229 200 144;
+    --ctp-green: 166 209 137;
+    --ctp-teal: 129 200 190;
+    --ctp-sky: 153 209 219;
+    --ctp-sapphire: 133 193 220;
+    --ctp-blue: 140 170 238;
+    --ctp-lavender: 186 187 241;
+    --ctp-text: 198 208 245;
+    --ctp-subtext1: 181 191 226;
+    --ctp-subtext0: 165 173 206;
+    --ctp-overlay2: 148 156 187;
+    --ctp-overlay1: 131 139 167;
+    --ctp-overlay0: 115 121 148;
+    --ctp-surface2: 98 104 128;
+    --ctp-surface1: 81 87 109;
+    --ctp-surface0: 65 69 89;
+    --ctp-base: 48 52 70;
+    --ctp-mantle: 41 44 60;
+    --ctp-crust: 35 38 52;
+  }
+
+  /* Catppuccin Latte */
+  .latte {
+    --ctp-rosewater: 220 138 120;
+    --ctp-flamingo: 221 120 120;
+    --ctp-pink: 234 118 203;
+    --ctp-mauve: 136 57 239;
+    --ctp-red: 210 15 57;
+    --ctp-maroon: 230 69 83;
+    --ctp-peach: 254 100 11;
+    --ctp-yellow: 223 142 29;
+    --ctp-green: 64 160 43;
+    --ctp-teal: 23 146 153;
+    --ctp-sky: 4 165 229;
+    --ctp-sapphire: 32 159 181;
+    --ctp-blue: 30 102 245;
+    --ctp-lavender: 114 135 253;
+    --ctp-text: 76 79 105;
+    --ctp-subtext1: 92 95 119;
+    --ctp-subtext0: 108 111 133;
+    --ctp-overlay2: 124 127 147;
+    --ctp-overlay1: 140 143 161;
+    --ctp-overlay0: 156 160 176;
+    --ctp-surface2: 172 176 190;
+    --ctp-surface1: 188 192 204;
+    --ctp-surface0: 204 208 218;
+    --ctp-base: 239 241 245;
+    --ctp-mantle: 230 233 239;
+    --ctp-crust: 220 224 232;
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes borderAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.section-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (max-width: 768px) {
+  .bg-gradient-border {
+    animation: mistGlow 12s ease-in-out infinite;
+  }
+
+  .bg-gradient-border::before {
+    filter: blur(4px);
+    padding: 6px;
+    animation: borderAnimation 12s ease infinite;
+  }
+}
+
+@keyframes sectionBorder {
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: blur(6px) brightness(1);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    filter: blur(8px) brightness(1.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .section-gradient-border {
+    box-shadow:
+      0 0 25px 5px rgba(147, 51, 234, 0.15),
+      0 0 60px 8px rgba(59, 130, 246, 0.1),
+      inset 0 0 15px rgba(236, 72, 153, 0.05);
+  }
+
+  .section-visible .section-gradient-border {
+    box-shadow:
+      0 0 35px 8px rgba(147, 51, 234, 0.2),
+      0 0 80px 15px rgba(59, 130, 246, 0.15),
+      inset 0 0 20px rgba(236, 72, 153, 0.1);
+  }
+
+  .section-gradient-border::before {
+    filter: blur(4px);
+    padding: 6px;
+  }
+}
+
+.infinite-void {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  isolation: isolate;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient 8s ease infinite;
+}
+
+.bg-size-200 {
+  background-size: 200% 200%;
+}
+
+/* Syntax highlighting */
+.token.keyword {
+  color: var(--editor-keyword);
+}
+.token.function {
+  color: var(--editor-function);
+}
+.token.string {
+  color: var(--editor-string);
+}
+.token.comment {
+  color: var(--editor-comment);
+}
+.token.class-name {
+  color: var(--editor-class);
+}
+.token.operator {
+  color: var(--editor-special);
+}
+.token.punctuation {
+  color: var(--editor-fg);
+}
+.token.number {
+  color: var(--editor-blue);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--editor-overlay0);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--editor-overlay1);
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Neon text effect */
+.neon-text {
+  text-shadow:
+    0 0 5px rgba(137, 180, 250, 0.5),
+    0 0 10px rgba(137, 180, 250, 0.3),
+    0 0 15px rgba(137, 180, 250, 0.2);
+  animation: neon-pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon-pulse {
+  from {
+    text-shadow:
+      0 0 5px rgba(137, 180, 250, 0.5),
+      0 0 10px rgba(137, 180, 250, 0.3),
+      0 0 15px rgba(137, 180, 250, 0.2);
+  }
+  to {
+    text-shadow:
+      0 0 10px rgba(137, 180, 250, 0.7),
+      0 0 20px rgba(137, 180, 250, 0.5),
+      0 0 30px rgba(137, 180, 250, 0.3);
+  }
+}
+
+/* Terminal cursor blink */
+.cursor-blink {
+  animation: blink 1s infinite;
+}
+
+/* Skeleton shimmer animation for lazy loading */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-shimmer {
+  animation: shimmer 1.5s infinite;
+}

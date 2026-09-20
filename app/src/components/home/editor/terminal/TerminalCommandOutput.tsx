@@ -1,0 +1,75 @@
+import React from "react";
+
+import { TerminalOutput } from "./use-terminal";
+
+interface TerminalCommandOutputProps {
+  outputBlocks: TerminalOutput[][];
+}
+
+/**
+ * TerminalCommandOutput component renders the output of terminal commands.
+ * It displays a series of output blocks, each containing multiple lines of text.
+ * The output can include both command lines and their respective results.
+ *
+ * @component
+ * @param {Object} props - The properties for the TerminalCommandOutput component.
+ * @param {TerminalOutput[][]} props.outputBlocks - A 2D array of terminal output blocks,
+ * where each block contains an array of lines of output.
+ *
+ * @returns {JSX.Element} The rendered TerminalCommandOutput component.
+ */
+const TerminalCommandOutput: React.FC<TerminalCommandOutputProps> = ({
+  outputBlocks,
+}) => {
+  return (
+    <>
+      {outputBlocks.map((block, blockIndex) => (
+        <div
+          key={`block-${block.map((line) => line.text).join("")}`}
+          className="rounded-xl overflow-hidden terminal-block-enter"
+          style={{
+            background: "rgba(30, 30, 46, 0.5)",
+            backdropFilter: "blur(12px)",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+            border: "1px solid rgba(49, 50, 68, 0.3)",
+          }}
+        >
+          {block.map((line, lineIndex) => (
+            <div
+              key={`line-${blockIndex}-${lineIndex}`}
+              className={`px-5 py-3 terminal-line-enter ${
+                line.isCommand
+                  ? "bg-gradient-to-r from-ctp-mantle to-ctp-base border-b border-ctp-surface0/30"
+                  : ""
+              }`}
+              style={{ animationDelay: `${lineIndex * 0.03}s` }}
+            >
+              {line.isCommand ? (
+                <div className="flex items-center">
+                  <span className="mr-2 text-ctp-blue font-bold">$</span>
+                  <span className="text-ctp-green shadow-sm shadow-ctp-green/30">
+                    {line.text}
+                  </span>
+                </div>
+              ) : (
+                <div
+                  className="text-ctp-text pl-6 text-shadow-sm"
+                  style={{
+                    whiteSpace: "pre-wrap",
+                    lineHeight: "1.6",
+                    letterSpacing: "0.01em",
+                    textShadow: "0 0 1px rgba(205, 214, 244, 0.1)",
+                  }}
+                >
+                  {line.text}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default TerminalCommandOutput;

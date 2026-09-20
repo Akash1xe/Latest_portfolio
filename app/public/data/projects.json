@@ -1,0 +1,58 @@
+[
+  {
+    "name": "BidX",
+    "tagline": "Real-time auction platform with event-driven bidding",
+    "description": "A production-minded auction system built around real-time bids, secure authentication, reliable state transitions, and scalable backend services.",
+    "keyFeatures": ["Real-time bid updates with server-authoritative auction state", "Secure bidder and seller authentication", "Concurrency-aware bidding flows", "Backend-first architecture with clear APIs"],
+    "technologies": ["node", "javascript", "react", "mongodb", "rest"],
+    "githubLink": "https://github.com/Akash1xe/BIDX",
+    "liveLink": "https://bidx-frontend.vercel.app/",
+    "icon": "⚡"
+  },
+  {
+    "name": "SafeRoute",
+    "tagline": "Safety-aware route planning and navigation",
+    "description": "A route-planning product that combines mapping data with safety signals to help users compare and choose safer journeys.",
+    "keyFeatures": ["Safety-oriented route comparison", "Location-aware API workflows", "Responsive map experience", "Modular service layer"],
+    "technologies": ["javascript", "react", "node", "rest"],
+    "githubLink": "https://github.com/Akash1xe/SafeRoute",
+    "icon": "🛡️"
+  },
+  {
+    "name": "RentX",
+    "tagline": "Full-stack rental marketplace",
+    "description": "A rental marketplace focused on dependable listing, discovery, booking, and account-management workflows.",
+    "keyFeatures": ["Searchable rental inventory", "Authentication-backed user workflows", "REST APIs for bookings and availability", "Responsive full-stack experience"],
+    "technologies": ["react", "node", "javascript", "mongodb", "rest"],
+    "githubLink": "https://github.com/Akash1xe/Rental",
+    "icon": "🏠"
+  },
+  {
+    "name": "Samvid",
+    "tagline": "Civic tech built for practical community impact",
+    "description": "A hackathon project that turns a social-impact idea into a usable, API-backed web product.",
+    "keyFeatures": ["Task-focused civic-tech workflows", "Responsive Vercel deployment", "Modular application structure", "Collaborative hackathon delivery"],
+    "technologies": ["react", "javascript", "node", "rest"],
+    "githubLink": "https://github.com/Akash1xe/Hackathon",
+    "liveLink": "https://samvid-india.vercel.app/",
+    "icon": "🇮🇳"
+  },
+  {
+    "name": "IRCTC Backend",
+    "tagline": "Railway search and booking service",
+    "description": "A backend-focused railway reservation project exploring authentication, search, booking, and transaction-oriented API design.",
+    "keyFeatures": ["API-first search and booking", "Protected operations", "Transaction-aware reservation design", "Modular services"],
+    "technologies": ["node", "javascript", "rest", "mysql"],
+    "githubLink": "https://github.com/Akash1xe/irctc-backend",
+    "icon": "🚆"
+  },
+  {
+    "name": "SentinelAI",
+    "tagline": "AI-assisted monitoring and analysis",
+    "description": "An applied AI project focused on turning incoming signals into useful analysis and actionable output.",
+    "keyFeatures": ["AI-assisted analysis pipeline", "Structured backend APIs", "Extensible data integrations", "Human-readable decision support"],
+    "technologies": ["python", "fastapi", "react", "rest"],
+    "githubLink": "https://github.com/Akash1xe/sentenintalAI",
+    "icon": "🤖"
+  }
+]

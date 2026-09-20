@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": { "@/*": ["./src/*"] },
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "types": ["node"]
+  },
+  "include": [
+    "api/**/*.ts",
+    "src/features/competitive-programming/types.ts",
+    "src/features/competitive-programming/fallback.ts",
+    "src/features/portfolio-content/types.ts",
+    "src/features/portfolio-content/defaults.ts"
+  ]
+}

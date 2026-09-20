@@ -1,0 +1,42 @@
+import { Route, Routes } from "react-router-dom";
+
+import { ThemeProvider } from "./components/base/ThemeProvider";
+import MainPortfolio from "./components/load/main-portfolio";
+import NotFound from "./components/load/not-found";
+import AdminDashboard from "./features/admin/admin-dashboard";
+import { PortfolioContentProvider } from "./features/portfolio-content/portfolio-content-context";
+
+function App() {
+  // This message will only appear in development (removed by terser in production)
+  console.log("Please Hire Me 🥺");
+
+  return (
+    <ThemeProvider>
+      <PortfolioContentProvider>
+      <Routes>
+        {/* Valid portfolio routes */}
+        <Route path="/" element={<MainPortfolio />} />
+        <Route path="/home" element={<MainPortfolio />} />
+        <Route path="/about" element={<MainPortfolio />} />
+        <Route path="/skills" element={<MainPortfolio />} />
+        <Route path="/projects" element={<MainPortfolio />} />
+        <Route path="/competitive-programming" element={<MainPortfolio />} />
+        <Route path="/experience" element={<MainPortfolio />} />
+        <Route path="/contact" element={<MainPortfolio />} />
+        <Route path="/learning" element={<MainPortfolio />} />
+        <Route path="/articles" element={<MainPortfolio />} />
+        <Route path="/resume" element={<MainPortfolio />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+
+        {/* Individual project deep-link — editor loads with that project tab active */}
+        <Route path="/projects/:slug" element={<MainPortfolio />} />
+
+        {/* Catch-all route for 404 */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      </PortfolioContentProvider>
+    </ThemeProvider>
+  );
+}
+
+export default App;

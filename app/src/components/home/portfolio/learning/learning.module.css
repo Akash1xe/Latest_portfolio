@@ -1,0 +1,11 @@
+/* learning.module.css */
+
+.arrowHover {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.arrowGroup:hover .arrowHover {
+  transform: translateX(4px);
+}
