@@ -60,14 +60,18 @@ const BasicPortfolio: React.FC<BasicPortfolioProps> = ({ layoutBroken }) => {
       <div className="project-section">
         <h3 className="text-lg font-serif mt-4 font-bold">Project 1</h3>
         <p className="text-base font-serif mb-2">
-          BidX — a real-time auction platform.
+          CargoFlow — distributed logistics and cargo-capacity booking.
         </p>
 
         <h3 className="text-lg font-serif mt-4 font-bold">Project 2</h3>
-        <p className="text-base font-serif mb-2">SafeRoute — safety-aware route planning.</p>
+        <p className="text-base font-serif mb-2">
+          Samvid — a civic-tech web product.
+        </p>
 
         <h3 className="text-lg font-serif mt-4 font-bold">Project 3</h3>
-        <p className="text-base font-serif mb-2">Samvid — a civic-tech web product.</p>
+        <p className="text-base font-serif mb-2">
+          BidX — a real-time auction platform.
+        </p>
       </div>
 
       <h2 className="text-xl font-serif mt-5 font-bold">Find Me</h2>

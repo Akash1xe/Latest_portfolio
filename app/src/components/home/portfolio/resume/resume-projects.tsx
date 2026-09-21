@@ -15,6 +15,19 @@ interface Project {
 
 const featuredProjects: Project[] = [
   {
+    name: "CargoFlow",
+    tagline: "Distributed logistics and cargo-capacity booking platform",
+    technologies: ["Node.js", "Kafka", "PostgreSQL", "Redis", "Docker"],
+    githubLink: "https://github.com/Akash1xe/CARGO",
+  },
+  {
+    name: "Samvid",
+    tagline: "Civic-tech product built for practical community impact",
+    technologies: ["React", "JavaScript", "Node.js"],
+    githubLink: "https://github.com/Akash1xe/Hackathon",
+    liveLink: "https://samvid-india.vercel.app/",
+  },
+  {
     name: "BidX",
     tagline: "Real-time auction platform with event-driven bidding",
     technologies: ["Node.js", "React", "MongoDB", "Socket.IO"],
@@ -23,7 +36,7 @@ const featuredProjects: Project[] = [
   {
     name: "SafeRoute",
     tagline: "Safety-aware route planning and navigation",
-    technologies: ["JavaScript", "React", "Node.js"],
+    technologies: ["TypeScript", "React", "Node.js"],
     githubLink: "https://github.com/Akash1xe/SafeRoute",
   },
   {
@@ -31,13 +44,6 @@ const featuredProjects: Project[] = [
     tagline: "Full-stack rental marketplace",
     technologies: ["React", "Node.js", "MongoDB"],
     githubLink: "https://github.com/Akash1xe/Rental",
-  },
-  {
-    name: "Samvid",
-    tagline: "Civic-tech product built for practical community impact",
-    technologies: ["React", "JavaScript", "Node.js"],
-    githubLink: "https://github.com/Akash1xe/Hackathon",
-    liveLink: "https://samvid-india.vercel.app/",
   },
   {
     name: "IRCTC Backend",

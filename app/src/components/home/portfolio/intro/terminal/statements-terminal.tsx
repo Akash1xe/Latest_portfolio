@@ -33,7 +33,8 @@ const qaPairs = [
   },
   {
     question: "ls current_projects/",
-    answer: "Building BidX while studying system design and competitive programming.",
+    answer:
+      "Building CargoFlow while studying distributed systems and competitive programming.",
     syntaxClass: "text-ctp-mauve",
     icon: <HiBookOpen className="text-ctp-mauve w-5 h-5 flex-shrink-0" />,
   },

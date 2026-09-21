@@ -17,17 +17,17 @@ import type { TechnologyLearning } from "@/types";
 
 export const currentLearningTechnologies: TechnologyLearning[] = [
   {
-    name: "Vector Databases & RAG",
-    icon: <Brain className="w-4 h-4" />,
+    name: "Event-Driven Microservices",
+    icon: <Server className="w-4 h-4" />,
     description:
-      "Implementing a code editor like cursor in the browser with RAG and vector database for context aware code search, autocomplete and chat with code.",
-    repoLink: "https://github.com/Akash1xe/AiVisulizer",
-    category: "AI/ML",
+      "Building CargoFlow to learn how production services coordinate bookings, payments, inventory, search and notifications through Kafka events.",
+    repoLink: "https://github.com/Akash1xe/CARGO",
+    category: "Backend",
     learningGoals: [
-      "Master vector embedding techniques for code representation and semantic search",
-      "Implement efficient retrieval-augmented generation pipelines for context-aware code completion",
-      "Develop optimized vector indexing strategies for real-time code search and retrieval",
-      "Build a responsive browser-based editor with LLM integration for intelligent code assistance",
+      "Design clear service boundaries with database-per-service ownership",
+      "Coordinate distributed booking transactions with Saga patterns and Kafka",
+      "Handle failed events safely with retries, idempotency and dead-letter queues",
+      "Build resilient API gateways with rate limiting and circuit breakers",
     ],
   },
   {
@@ -161,9 +161,9 @@ export const learningJourneyItems: {
   accent: string;
 }[] = [
   {
-    title: "Vector Databases & RAG",
+    title: "Event-Driven Systems",
     description:
-      "I'm exploring vector databases and retrieval-augmented generation to create more context-aware AI applications. This helps me build tools that better understand and generate code by leveraging semantic search capabilities.",
+      "I'm applying Kafka, Saga coordination, idempotency, retries and dead-letter queues in CargoFlow to understand how distributed services stay consistent when individual steps fail.",
     icon: <Lightbulb className="w-5 h-5" />,
     color: "mauve",
     gradient: "from-ctp-mauve/20 to-ctp-lavender/20",
